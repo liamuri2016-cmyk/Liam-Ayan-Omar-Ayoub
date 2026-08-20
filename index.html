@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Liam Ayan Omar Ayoub</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    header {
+      margin-top: 60px;
+      text-align: center;
+      animation: fadeDown 1s ease;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      background: linear-gradient(90deg, #f7971e, #ffd200, #f7971e);
+      background-size: 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmer 3s linear infinite;
+    }
+
+    header p {
+      margin-top: 10px;
+      font-size: 1.1rem;
+      color: #b8b8d4;
+    }
+
+    .links {
+      margin-top: 50px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      padding: 0 20px;
+    }
+
+    .card {
+      width: 280px;
+      padding: 40px 20px;
+      border-radius: 16px;
+      text-align: center;
+      text-decoration: none;
+      color: #fff;
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 16px;
+      padding: 2px;
+      background: linear-gradient(135deg, var(--c1), var(--c2));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+    }
+
+    .card:hover {
+      transform: translateY(-8px) scale(1.03);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .card .icon {
+      font-size: 3rem;
+      margin-bottom: 16px;
+    }
+
+    .card h2 {
+      font-size: 1.3rem;
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      font-size: 0.9rem;
+      color: #ccc;
+    }
+
+    .card-win93 { --c1: #00c6ff; --c2: #0072ff; background: rgba(0, 114, 255, 0.15); }
+    .card-crazy { --c1: #f857a6; --c2: #ff5858; background: rgba(248, 87, 166, 0.15); }
+    .card-melon { --c1: #11998e; --c2: #38ef7d; background: rgba(17, 153, 142, 0.15); }
+
+    footer {
+      margin-top: auto;
+      padding: 30px;
+      color: #666;
+      font-size: 0.85rem;
+    }
+
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes shimmer {
+      0%   { background-position: 200% center; }
+      100% { background-position: -200% center; }
+    }
+
+    @media (max-width: 600px) {
+      header h1 { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Liam Ayan Omar Ayoub</h1>
+    <p>Click a link below to explore!</p>
+  </header>
+
+  <section class="links">
+
+    <a class="card card-win93" href="https://www.windows93.net" target="_blank" rel="noopener">
+      <div class="icon">&#x1F5A5;</div>
+      <h2>Windows 93</h2>
+      <p>Experience the retro Windows 93 emulator right in your browser.</p>
+    </a>
+
+    <a class="card card-crazy" href="https://www.crazygames.com" target="_blank" rel="noopener">
+      <div class="icon">&#x1F3AE;</div>
+      <h2>CrazyGames</h2>
+      <p>Play thousands of free browser games instantly.</p>
+    </a>
+
+    <a class="card card-melon" href="https://www.melonsandbox.com" target="_blank" rel="noopener">
+      <div class="icon">&#x1F349;</div>
+      <h2>Melon Sandbox</h2>
+      <p>Create, experiment, and have fun with physics sandbox.</p>
+    </a>
+
+  </section>
+
+  <footer>&copy; 2026 Liam Ayan Omar Ayoub</footer>
+
+</body>
+</html>
