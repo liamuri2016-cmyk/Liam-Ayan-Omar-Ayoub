@@ -98,6 +98,89 @@
     .card-anydesk { --c1: #ffd200; --c2: #ff6b00; background: rgba(255, 210, 0, 0.15); }
     .card-youtube { --c1: #ff0000; --c2: #cc0000; background: rgba(255, 0, 0, 0.15); }
 
+    .poll {
+      margin-top: 50px;
+      text-align: center;
+      animation: fadeDown 1.2s ease;
+    }
+
+    .poll h2 {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      color: #b8b8d4;
+    }
+
+    .poll-options {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .poll-btn {
+      padding: 12px 32px;
+      border: 2px solid #555;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s, border-color 0.3s, transform 0.3s;
+    }
+
+    .poll-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: #ffd200;
+      transform: translateY(-3px);
+    }
+
+    .poll-btn.selected {
+      background: rgba(255, 210, 0, 0.25);
+      border-color: #ffd200;
+      color: #ffd200;
+    }
+
+    .poll-results {
+      margin-top: 20px;
+      display: none;
+    }
+
+    .poll-results .bar-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin: 8px 0;
+    }
+
+    .poll-results .bar-label {
+      width: 70px;
+      text-align: right;
+      font-size: 0.95rem;
+      color: #ccc;
+    }
+
+    .poll-results .bar-track {
+      width: 200px;
+      height: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .poll-results .bar-fill {
+      height: 100%;
+      border-radius: 10px;
+      transition: width 0.6s ease;
+    }
+
+    .poll-results .bar-pct {
+      width: 40px;
+      text-align: left;
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+
     footer {
       margin-top: auto;
       padding: 30px;
@@ -161,7 +244,52 @@
 
   </section>
 
+  <section class="poll">
+    <h2>Poll: Which device do you use?</h2>
+    <div class="poll-options">
+      <button class="poll-btn" onclick="vote('ios')">iOS</button>
+      <button class="poll-btn" onclick="vote('windows')">Windows</button>
+      <button class="poll-btn" onclick="vote('macos')">macOS</button>
+    </div>
+    <div id="poll-results" class="poll-results"></div>
+  </section>
+
   <footer>&copy; 2026 Liam Ayan Omar Ayoub</footer>
+
+  <script>
+    const STORAGE_KEY = 'liam_poll_votes';
+    let votes = JSON.parse(localStorage.getItem(STORAGE_KEY)) || { ios: 0, windows: 0, macos: 0 };
+
+    function renderResults() {
+      const total = votes.ios + votes.windows + votes.macos;
+      if (total === 0) return;
+      const results = document.getElementById('poll-results');
+      const data = [
+        { label: 'iOS', count: votes.ios, color: '#4285f4' },
+        { label: 'Windows', count: votes.windows, color: '#34a853' },
+        { label: 'macOS', count: votes.macos, color: '#f857a6' }
+      ];
+      results.innerHTML = data.map(d => {
+        const pct = Math.round((d.count / total) * 100);
+        return `<div class="bar-container">
+          <span class="bar-label">${d.label}</span>
+          <div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:${d.color}"></div></div>
+          <span class="bar-pct">${pct}%</span>
+        </div>`;
+      }).join('');
+      results.style.display = 'block';
+    }
+
+    function vote(choice) {
+      votes[choice]++;
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(votes));
+      document.querySelectorAll('.poll-btn').forEach(b => b.classList.remove('selected'));
+      event.target.classList.add('selected');
+      renderResults();
+    }
+
+    renderResults();
+  </script>
 
 </body>
 </html>
